@@ -1,0 +1,7 @@
+{
+    "name": "circle",
+    "private": true,
+    "dependencies": {
+        "purescript-halogen-svg": "git://github.com/kwohlfahrt/purescript-halogen-svg.git"
+    }
+}
