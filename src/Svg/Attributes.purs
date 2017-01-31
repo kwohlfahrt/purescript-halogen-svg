@@ -6,8 +6,8 @@ import Data.String (joinWith)
 
 import Core as Core
 
-import Halogen.HTML.Core (Prop, AttrName, attrName)
-import Halogen.HTML.Properties.Indexed (IProp, I)
+import Halogen.HTML.Core (Prop, AttrName(AttrName))
+import Halogen.HTML.Properties (IProp, I)
 import Unsafe.Coerce (unsafeCoerce)
 
 data Color = RGB Int Int Int
@@ -23,37 +23,37 @@ attr = coe Core.attr
     coe = unsafeCoerce
 
 cx :: forall r i. Number -> IProp (cx :: I | r) i
-cx = attr (attrName "cx") <<< show
+cx = attr (AttrName "cx") <<< show
 
 cy :: forall r i. Number -> IProp (cy :: I | r) i
-cy = attr (attrName "cy") <<< show
+cy = attr (AttrName "cy") <<< show
 
 r :: forall s i. Number -> IProp (r :: I | s) i
-r = attr (attrName "r") <<< show
+r = attr (AttrName "r") <<< show
 
 viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: I | r) i
-viewBox x y w h = attr (attrName "viewBox") (joinWith " " $ map show [x, y, w, h])
+viewBox x y w h = attr (AttrName "viewBox") (joinWith " " $ map show [x, y, w, h])
 
 rx :: forall r i. Number -> IProp (rx :: I | r) i
-rx = attr (attrName "rx") <<< show
+rx = attr (AttrName "rx") <<< show
 
 ry :: forall r i. Number -> IProp (ry :: I | r) i
-ry = attr (attrName "ry") <<< show
+ry = attr (AttrName "ry") <<< show
 
 width :: forall r i. Number -> IProp (width :: I | r) i
-width = attr (attrName "width") <<< show
+width = attr (AttrName "width") <<< show
 
 height :: forall r i. Number -> IProp (height :: I | r) i
-height = attr (attrName "height") <<< show
+height = attr (AttrName "height") <<< show
 
 x :: forall r i. Number -> IProp (x :: I | r) i
-x = attr (attrName "x") <<< show
+x = attr (AttrName "x") <<< show
 
 y :: forall r i. Number -> IProp (y :: I | r) i
-y = attr (attrName "y") <<< show
+y = attr (AttrName "y") <<< show
 
 stroke :: forall r i. Maybe Color -> IProp (stroke :: I | r) i
-stroke = attr (attrName "stroke") <<< printColor
+stroke = attr (AttrName "stroke") <<< printColor
 
 fill :: forall r i. Maybe Color -> IProp (fill :: I | r) i
-fill = attr (attrName "fill") <<< printColor
+fill = attr (AttrName "fill") <<< printColor
