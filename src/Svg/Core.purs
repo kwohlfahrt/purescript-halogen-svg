@@ -1,4 +1,5 @@
 module Core where
+-- Like Halogen.HTML.Core
 
 import Prelude
 import Data.Maybe (Maybe(..))

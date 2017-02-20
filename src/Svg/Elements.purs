@@ -1,4 +1,5 @@
 module Svg.Elements where
+-- Like Halogen.HTML.Elements
 
 import Prelude
 
@@ -6,8 +7,9 @@ import Core as Core
 
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Elements (Node, Leaf)
-import Halogen.HTML.Properties (IProp, I)
+import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
+import Svg.Indexed as I
 
 element :: forall r p i. ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
 element = coe Core.element
@@ -16,11 +18,11 @@ element = coe Core.element
         -> ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
     coe = unsafeCoerce
 
-svg :: forall p i. Node (viewBox :: I) p i
+svg :: forall p i. Node I.SVGsvg p i
 svg = element $ ElemName "svg"
 
-circle :: forall p i. Leaf (cx :: I, cy :: I, r :: I, stroke :: I, fill :: I) p i
+circle :: forall p i. Leaf I.SVGcircle p i
 circle props = element (ElemName "circle") props []
 
-rect :: forall p i. Leaf (x :: I, y :: I, width :: I, height :: I, stroke :: I, fill :: I) p i
+rect :: forall p i. Leaf I.SVGrect p i
 rect props = element (ElemName "rect") props []
