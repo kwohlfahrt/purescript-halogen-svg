@@ -21,3 +21,5 @@ type SVGrect = Interactive
   , stroke :: String
   , fill :: String
   )
+
+type SVGg = Interactive ()

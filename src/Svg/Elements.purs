@@ -21,6 +21,9 @@ element = coe Core.element
 svg :: forall p i. Node I.SVGsvg p i
 svg = element $ ElemName "svg"
 
+g :: forall p i. Node I.SVGg p i
+g = element $ ElemName "g"
+
 circle :: forall p i. Leaf I.SVGcircle p i
 circle props = element (ElemName "circle") props []
 
