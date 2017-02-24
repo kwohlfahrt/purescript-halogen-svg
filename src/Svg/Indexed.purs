@@ -11,6 +11,7 @@ type SVGcircle = Interactive
   , r :: Number
   , stroke :: String
   , fill :: String
+  , transform :: String
   )
 
 type SVGrect = Interactive
@@ -20,6 +21,8 @@ type SVGrect = Interactive
   , height :: Number
   , stroke :: String
   , fill :: String
+  , transform :: String
   )
 
-type SVGg = Interactive ()
+type SVGg = Interactive
+  ( transform :: String )

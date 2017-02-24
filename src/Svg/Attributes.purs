@@ -17,6 +17,22 @@ printColor :: Maybe Color -> String
 printColor (Just (RGB r g b)) = "rgb(" <> (joinWith "," $ map show [r, g, b]) <> ")"
 printColor Nothing = "None"
 
+data Transform
+  = Matrix Number Number Number Number Number Number
+  | Translate Number Number
+  | Scale Number Number
+  | Rotate Number Number Number
+  | SkewX Number
+  | SkewY Number
+
+printTransform :: Transform -> String
+printTransform (Matrix a b c d e f) = "matrix(" <> (joinWith "," $ map show [a, b, c, d, e, f]) <> ")"
+printTransform (Translate x y) = "translate(" <> (joinWith "," $ map show [x, y]) <> ")"
+printTransform (Scale x y) = "scale(" <> (joinWith "," $ map show [x, y]) <> ")"
+printTransform (Rotate a x y) = "rotate(" <> (joinWith "," $ map show [a, x, y]) <> ")"
+printTransform (SkewX a) = "skewX(" <> show a <> ")"
+printTransform (SkewY a) = "skewY(" <> show a <> ")"
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -58,3 +74,6 @@ stroke = attr (AttrName "stroke") <<< printColor
 
 fill :: forall r i. Maybe Color -> IProp (fill :: String | r) i
 fill = attr (AttrName "fill") <<< printColor
+
+transform :: forall r i . Array Transform -> IProp (transform :: String | r) i
+transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
