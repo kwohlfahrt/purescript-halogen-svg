@@ -29,3 +29,6 @@ circle props = element (ElemName "circle") props []
 
 rect :: forall p i. Leaf I.SVGrect p i
 rect props = element (ElemName "rect") props []
+
+path :: forall p i. Leaf I.SVGpath p i
+path props = element (ElemName "path") props []

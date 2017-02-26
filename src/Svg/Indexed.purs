@@ -26,3 +26,10 @@ type SVGrect = Interactive
 
 type SVGg = Interactive
   ( transform :: String )
+
+type SVGpath = Interactive
+  ( d :: String
+  , stroke :: String
+  , fill :: String
+  , transform :: String
+  )
