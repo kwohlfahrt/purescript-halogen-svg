@@ -25,6 +25,13 @@ data Transform
   | SkewX Number
   | SkewY Number
 
+data TextAnchor = Start | Middle | End
+
+printTextAnchor :: TextAnchor -> String
+printTextAnchor Start = "start"
+printTextAnchor Middle = "middle"
+printTextAnchor End = "end"
+
 printTransform :: Transform -> String
 printTransform (Matrix a b c d e f) =
   "matrix(" <> (joinWith "," $ map show [a, b, c, d, e, f]) <> ")"
@@ -118,3 +125,6 @@ transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
 
 d :: forall r i . Array D -> IProp (d :: String | r) i
 d = attr (AttrName "d") <<< joinWith " " <<< map printD
+
+text_anchor :: forall r i . TextAnchor -> IProp (transform :: String | r) i
+text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor

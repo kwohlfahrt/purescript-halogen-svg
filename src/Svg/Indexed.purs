@@ -33,3 +33,12 @@ type SVGpath = Interactive
   , fill :: String
   , transform :: String
   )
+
+type SVGtext = Interactive
+  ( x :: Number
+  , y :: Number
+  , text_anchor :: String
+  , stroke :: String
+  , fill :: String
+  , transform :: String
+  )
