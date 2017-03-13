@@ -42,3 +42,10 @@ type SVGtext = Interactive
   , fill :: String
   , transform :: String
   )
+
+type SVGforeignObject = Interactive
+  ( x :: Number
+  , y :: Number
+  , height :: Number
+  , width :: Number
+  )

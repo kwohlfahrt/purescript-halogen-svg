@@ -35,3 +35,6 @@ path props = element (ElemName "path") props []
 
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
+
+foreignObject :: forall p i . Node I.SVGforeignObject p i
+foreignObject = element (ElemName "foreignObject")
