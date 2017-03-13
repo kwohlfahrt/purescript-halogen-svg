@@ -34,4 +34,4 @@ path :: forall p i. Leaf I.SVGpath p i
 path props = element (ElemName "path") props []
 
 text :: forall p i. Node I.SVGtext p i
-text props = element (ElemName "text") props
+text = element (ElemName "text")
