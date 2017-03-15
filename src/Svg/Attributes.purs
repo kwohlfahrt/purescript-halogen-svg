@@ -126,5 +126,5 @@ transform = attr (AttrName "transform") <<< joinWith " " <<< map printTransform
 d :: forall r i . Array D -> IProp (d :: String | r) i
 d = attr (AttrName "d") <<< joinWith " " <<< map printD
 
-text_anchor :: forall r i . TextAnchor -> IProp (transform :: String | r) i
+text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
 text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
