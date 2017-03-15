@@ -38,6 +38,7 @@ type SVGtext = Interactive
   ( x :: Number
   , y :: Number
   , text_anchor :: String
+  , dominant_baseline :: String
   , stroke :: String
   , fill :: String
   , transform :: String

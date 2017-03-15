@@ -25,12 +25,29 @@ data Transform
   | SkewX Number
   | SkewY Number
 
-data TextAnchor = Start | Middle | End
+data TextAnchor = Start | AnchorMiddle | End
 
 printTextAnchor :: TextAnchor -> String
 printTextAnchor Start = "start"
-printTextAnchor Middle = "middle"
+printTextAnchor AnchorMiddle = "middle"
 printTextAnchor End = "end"
+
+data Baseline
+  = Auto | UseScript | NoChange | ResetSize | Ideographic | Alphabetic | Hanging
+  | Mathematical | Central | BaselineMiddle | TextAfterEdge | TextBeforeEdge
+printBaseline :: Baseline -> String
+printBaseline Auto = "auto"
+printBaseline UseScript = "use-script"
+printBaseline NoChange = "no-change"
+printBaseline ResetSize = "reset-size"
+printBaseline Ideographic = "ideographic"
+printBaseline Alphabetic = "alphabetic"
+printBaseline Hanging = "hanging"
+printBaseline Mathematical = "mathematical"
+printBaseline Central = "central"
+printBaseline BaselineMiddle = "middle"
+printBaseline TextAfterEdge = "text-after-edge"
+printBaseline TextBeforeEdge = "text-before-edge"
 
 printTransform :: Transform -> String
 printTransform (Matrix a b c d e f) =
@@ -128,3 +145,6 @@ d = attr (AttrName "d") <<< joinWith " " <<< map printD
 
 text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
 text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
+
+dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
+dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
