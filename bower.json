@@ -9,7 +9,7 @@
   "dependencies": {
     "purescript-strings": "^2.0.0",
     "purescript-halogen": "^1.0.0",
-    "purescript-dom-indexed": "^1.0.0"
+    "purescript-dom-indexed": "^2.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^2.0.0"
