@@ -8,10 +8,14 @@
   ],
   "dependencies": {
     "purescript-strings": "^3.0.0",
-    "purescript-halogen": "^2.0.0",
+    "purescript-halogen": "^2.3.0",
     "purescript-dom-indexed": "^3.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^3.0.0"
+  }
+  , "repository": {
+    "type": "git"
+    , "url" : "https://github.com/AidanDelaney/purescript-halogen-svg.git"
   }
 }
