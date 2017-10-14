@@ -1,5 +1,9 @@
 {
   "name": "purescript-halogen-svg",
+  "authors": [
+    "Kai Wohlfahrt <kai.wohlfahrt@gmail.com>"
+  ],
+  "license": "BSD-3-Clause",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -8,10 +12,14 @@
   ],
   "dependencies": {
     "purescript-strings": "^3.0.0",
-    "purescript-halogen": "^2.0.0",
+    "purescript-halogen": "^2.3.0",
     "purescript-dom-indexed": "^3.0.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kwohlfahrt/purescript-halogen-svg.git"
   }
 }
