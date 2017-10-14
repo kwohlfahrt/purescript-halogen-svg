@@ -22,4 +22,8 @@
     "type": "git",
     "url": "https://github.com/kwohlfahrt/purescript-halogen-svg.git"
   }
+  , "repository": {
+    "type": "git"
+    , "url" : "https://github.com/AidanDelaney/purescript-halogen-svg.git"
+  }
 }
