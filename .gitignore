@@ -6,3 +6,4 @@
 /src/.webpack.js
 /dist/app.js
 /*.log
+package-lock.json
