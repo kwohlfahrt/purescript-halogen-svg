@@ -160,3 +160,9 @@ text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
 
 dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
+
+class_ :: forall r i . String -> IProp (class :: String | r) i
+class_ = attr (AttrName "class")
+
+id :: forall r i . String -> IProp (id :: String | r) i
+id = attr (AttrName "id")

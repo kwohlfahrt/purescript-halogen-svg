@@ -1,7 +1,11 @@
 module Svg.Indexed where
 -- Like DOM.HTML.Indexed
 
-import DOM.HTML.Indexed (Interactive)
+import DOM.HTML.Indexed (MouseEvents)
+
+type Base r = (id :: String, class :: String | r)
+
+type Interactive r = MouseEvents (Base r)
 
 type SVGsvg = Interactive (viewBox :: String)
 
