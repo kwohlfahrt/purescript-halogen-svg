@@ -17,6 +17,8 @@ type SVGcircle = Interactive
 type SVGrect = Interactive
   ( x :: Number
   , y :: Number
+  , rx :: Number
+  , ry :: Number
   , width :: Number
   , height :: Number
   , stroke :: String
