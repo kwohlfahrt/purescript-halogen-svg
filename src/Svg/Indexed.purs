@@ -5,58 +5,51 @@ import DOM.HTML.Indexed (Interactive)
 
 type SVGsvg = Interactive (viewBox :: String)
 
-type SVGcircle = Interactive
+type PresentationAttributes r = (stroke :: String, fill ::String | r)
+type GlobalAttributes r = PresentationAttributes (Interactive r)
+
+type SVGcircle = GlobalAttributes
   ( cx :: Number
   , cy :: Number
   , r :: Number
-  , stroke :: String
-  , fill :: String
   , transform :: String
   )
 
-type SVGrect = Interactive
+type SVGrect = GlobalAttributes
   ( x :: Number
   , y :: Number
   , rx :: Number
   , ry :: Number
   , width :: Number
   , height :: Number
-  , stroke :: String
-  , fill :: String
   , transform :: String
   )
 
-type SVGg = Interactive
+type SVGg = GlobalAttributes
   ( transform :: String )
 
-type SVGpath = Interactive
+type SVGpath = GlobalAttributes
   ( d :: String
-  , stroke :: String
-  , fill :: String
   , transform :: String
   )
 
-type SVGline = Interactive
+type SVGline = GlobalAttributes
   ( x1 :: Number
   , y1 :: Number
   , x2 :: Number
   , y2 :: Number
-  , stroke :: String
-  , fill :: String
   , transform :: String
   )
 
-type SVGtext = Interactive
+type SVGtext = GlobalAttributes
   ( x :: Number
   , y :: Number
   , text_anchor :: String
   , dominant_baseline :: String
-  , stroke :: String
-  , fill :: String
   , transform :: String
   )
 
-type SVGforeignObject = Interactive
+type SVGforeignObject = GlobalAttributes
   ( x :: Number
   , y :: Number
   , height :: Number
