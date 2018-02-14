@@ -33,6 +33,9 @@ rect props = element (ElemName "rect") props []
 path :: forall p i. Leaf I.SVGpath p i
 path props = element (ElemName "path") props []
 
+line :: forall p i. Leaf I.SVGline p i
+line props = element (ElemName "line") props []
+
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
 

@@ -36,6 +36,16 @@ type SVGpath = Interactive
   , transform :: String
   )
 
+type SVGline = Interactive
+  ( x1 :: Number
+  , y1 :: Number
+  , x2 :: Number
+  , y2 :: Number
+  , stroke :: String
+  , fill :: String
+  , transform :: String
+  )
+
 type SVGtext = Interactive
   ( x :: Number
   , y :: Number

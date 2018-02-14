@@ -131,6 +131,18 @@ x = attr (AttrName "x") <<< show
 y :: forall r i. Number -> IProp (y :: Number | r) i
 y = attr (AttrName "y") <<< show
 
+x1 :: forall r i. Number -> IProp (x1 :: Number | r) i
+x1 = attr (AttrName "x1") <<< show
+
+y1 :: forall r i. Number -> IProp (y1 :: Number | r) i
+y1 = attr (AttrName "y1") <<< show
+
+x2 :: forall r i. Number -> IProp (x2 :: Number | r) i
+x2 = attr (AttrName "x2") <<< show
+
+y2 :: forall r i. Number -> IProp (y2 :: Number | r) i
+y2 = attr (AttrName "y2") <<< show
+
 stroke :: forall r i. Maybe Color -> IProp (stroke :: String | r) i
 stroke = attr (AttrName "stroke") <<< printColor
 
