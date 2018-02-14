@@ -3,14 +3,13 @@ module Svg.Indexed where
 
 import DOM.HTML.Indexed (MouseEvents)
 
-type Base r = (id :: String, class :: String | r)
+type CoreAttributes r = (id :: String | r)
+type GraphicalEventAttributes r = MouseEvents r
 
-type Interactive r = MouseEvents (Base r)
-
-type SVGsvg = Interactive (viewBox :: String)
+type SVGsvg = GraphicalEventAttributes (CoreAttributes (viewBox :: String))
 
 type PresentationAttributes r = (stroke :: String, fill ::String | r)
-type GlobalAttributes r = PresentationAttributes (Interactive r)
+type GlobalAttributes r = (PresentationAttributes (GraphicalEventAttributes (CoreAttributes (class ::String | r))))
 
 type SVGcircle = GlobalAttributes
   ( cx :: Number
