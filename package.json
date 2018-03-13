@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "psc-package install",
     "build": "pulp browserify --optimise --to dist/app.js",
     "watch": "pulp -w browserify --to dist/app.js",
     "test": "pulp test"
@@ -11,8 +11,8 @@
   },
   "devDependencies": {
     "pulp": "^12.0.1",
-    "bower": "^1.8.2",
-    "purescript": "^0.11.6",
+    "psc-package": "^0.3.1",
+    "purescript": "^0.11.7",
     "purescript-psa": "^0.5.1"
   }
 }
