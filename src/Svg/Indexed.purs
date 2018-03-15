@@ -18,6 +18,14 @@ type SVGcircle = GlobalAttributes
   , transform :: String
   )
 
+type SVGellipse = GlobalAttributes
+  ( cx :: Number
+  , cy :: Number
+  , rx :: Number
+  , ry :: Number
+  , transform :: String
+  )
+
 type SVGrect = GlobalAttributes
   ( x :: Number
   , y :: Number

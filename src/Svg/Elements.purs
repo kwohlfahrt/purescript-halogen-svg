@@ -27,6 +27,9 @@ g = element $ ElemName "g"
 circle :: forall p i. Leaf I.SVGcircle p i
 circle props = element (ElemName "circle") props []
 
+ellipse :: forall p i. Leaf I.SVGellipse p i
+ellipse props = element (ElemName "ellipse") props []
+
 rect :: forall p i. Leaf I.SVGrect p i
 rect props = element (ElemName "rect") props []
 
