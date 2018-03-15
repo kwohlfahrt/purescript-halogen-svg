@@ -2,9 +2,9 @@
   "private": true,
   "scripts": {
     "postinstall": "psc-package install",
-    "build": "pulp browserify --optimise --to dist/app.js",
-    "watch": "pulp -w browserify --to dist/app.js",
-    "test": "pulp test"
+    "build": "pulp --psc-package browserify --optimise --to dist/app.js",
+    "watch": "pulp --psc-package -w browserify --to dist/app.js",
+    "test": "pulp --psc-package test"
   },
   "dependencies": {
     "virtual-dom": "^2.1.1"
