@@ -1,0 +1,8 @@
+{
+  "name": "svg-example",
+  "set": "master",
+  "source": "https://github.com/kwohlfahrt/package-sets.git",
+  "depends": [
+    "prelude", "halogen", "halogen-svg"
+  ]
+}
