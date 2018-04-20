@@ -6,7 +6,7 @@ import DOM.HTML.Indexed (MouseEvents)
 type CoreAttributes r = (id :: String | r)
 type GraphicalEventAttributes r = MouseEvents r
 
-type SVGsvg = GraphicalEventAttributes (CoreAttributes (viewBox :: String))
+type SVGsvg = GraphicalEventAttributes (CoreAttributes (width :: Number, height :: Number, viewBox :: String))
 
 type PresentationAttributes r = (stroke :: String, fill ::String | r)
 type GlobalAttributes r = (PresentationAttributes (GraphicalEventAttributes (CoreAttributes (class ::String | r))))
