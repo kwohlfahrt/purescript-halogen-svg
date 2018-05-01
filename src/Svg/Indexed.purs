@@ -1,13 +1,17 @@
 module Svg.Indexed where
 -- Like DOM.HTML.Indexed
 
-import DOM.HTML.Indexed (MouseEvents, KeyEvents, ClipboardEvents)
-import DOM.Event.Types (MouseEvent)
+import DOM.HTML.Indexed (MouseEvents)
+import DOM.Event.Types (MouseEvent, WheelEvent)
 
 type CoreAttributes r = (id :: String | r)
-type GraphicalEventAttributes r = ClipboardEvents (KeyEvents (MouseEvents (onContextMenu :: MouseEvent | r)))
+type GraphicalEventAttributes r = MouseEvents r
 
-type SVGsvg = GraphicalEventAttributes (CoreAttributes (width :: Number, height :: Number, viewBox :: String))
+type SVGsvg = GraphicalEventAttributes (CoreAttributes (width :: Number, 
+                                                        height :: Number, 
+                                                        viewBox :: String, 
+                                                        onWheel :: WheelEvent, 
+                                                        onContextMenu :: MouseEvent))
 
 type PresentationAttributes r = (stroke :: String, fill :: String | r)
 type GlobalAttributes r = (PresentationAttributes (GraphicalEventAttributes (CoreAttributes (class :: String | r))))
