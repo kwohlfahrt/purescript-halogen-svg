@@ -1,15 +1,40 @@
 module Svg.Indexed where
--- Like DOM.HTML.Indexed
 
-import DOM.HTML.Indexed (MouseEvents)
+import DOM.Event.Types (MouseEvent, WheelEvent, KeyboardEvent)
+
+-- Attributes based on Mozilla MDN categories
 
 type CoreAttributes r = (id :: String | r)
-type GraphicalEventAttributes r = MouseEvents r
 
-type SVGsvg = GraphicalEventAttributes (CoreAttributes (width :: Number, height :: Number, viewBox :: String))
+type StyleAttributes r = ("class" :: String | r)
 
+-- Subset of events that work on Firefox 60/Chromium 66
+type GlobalEventAttributes r =
+  ( onClick :: MouseEvent
+  , onContextMenu :: MouseEvent
+  , onKeyDown :: KeyboardEvent
+  , onKeyPress :: KeyboardEvent
+  , onKeyUp :: KeyboardEvent
+  , onMouseDown :: MouseEvent
+  , onMouseEnter :: MouseEvent
+  , onMouseLeave :: MouseEvent
+  , onMouseMove :: MouseEvent
+  , onMouseOut :: MouseEvent
+  , onMouseOver :: MouseEvent
+  , onMouseUp :: MouseEvent
+  , onWheel :: WheelEvent
+  | r)
+
+-- These can also be done with CSS
 type PresentationAttributes r = (stroke :: String, fill :: String | r)
-type GlobalAttributes r = (PresentationAttributes (GraphicalEventAttributes (CoreAttributes (class :: String | r))))
+
+type GlobalAttributes r = (PresentationAttributes (GlobalEventAttributes (StyleAttributes (CoreAttributes r))))
+
+type SVGsvg = GlobalAttributes
+  ( width :: Number
+  , height :: Number
+  , viewBox :: String
+  )
 
 type SVGcircle = GlobalAttributes
   ( cx :: Number
