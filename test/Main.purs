@@ -4,8 +4,8 @@ import Prelude
 import Halogen as H
 import Svg.Attributes as SA
 import Svg.Elements as SE
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log)
+import Effect (Effect)
+import Effect.Console (log)
 
 -- smoke test
 
@@ -15,5 +15,5 @@ render state =
 
 -- not a real test, just making sure things compile
 
-main :: Eff (console :: CONSOLE) Unit
+main :: Effect Unit
 main = log "Nothing to see here"

@@ -3,12 +3,12 @@ module Main where
 import Prelude
 import Data.Maybe (Maybe(..))
 
-import Control.Monad.Eff (Eff)
+import Effect (Effect)
 
 import Halogen as H
 import Halogen.HTML (HTML)
 import Halogen.HTML.Events as HE
-import Halogen.Aff (awaitBody, runHalogenAff, HalogenEffects)
+import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.VDom.Driver (runUI)
 
 import Svg.Elements as SE
@@ -42,10 +42,10 @@ ui = H.component { initialState, render, eval, receiver: const Nothing }
 
   eval :: Query ~> H.ComponentDSL State Query Void g
   eval (ToggleState next) = do
-    H.modify (\state -> state { on = not state.on })
+    _ <- H.modify (\state -> state { on = not state.on })
     pure next
 
-main :: Eff (HalogenEffects ()) Unit
+main :: Effect Unit
 main = runHalogenAff do
   body <- awaitBody
   runUI ui unit body

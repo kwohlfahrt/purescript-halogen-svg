@@ -1,6 +1,8 @@
 module Svg.Indexed where
 
-import DOM.Event.Types (MouseEvent, WheelEvent, KeyboardEvent)
+import Web.UIEvent.MouseEvent (MouseEvent)
+import Web.UIEvent.WheelEvent (WheelEvent)
+import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 
 -- Attributes based on Mozilla MDN categories
 
