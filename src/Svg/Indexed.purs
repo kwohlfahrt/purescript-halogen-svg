@@ -34,6 +34,7 @@ type SVGsvg = GlobalAttributes
   ( width :: Number
   , height :: Number
   , viewBox :: String
+  , preserveAspectRatio :: String
   )
 
 type SVGcircle = GlobalAttributes

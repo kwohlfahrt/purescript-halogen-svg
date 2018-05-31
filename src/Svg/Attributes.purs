@@ -95,6 +95,18 @@ printCommand (A rx ry rot large sweep x y) =
   sweep_flag = if sweep then "0" else "1"
 printCommand Z = {command: "z", params: ""}
 
+data Align = Min | Mid | Max
+
+printAlign :: Align -> String
+printAlign Min = "Min"
+printAlign Mid = "Mid"
+printAlign Max = "Max"
+
+data MeetOrSlice = Meet | Slice
+printMeetOrSlice :: MeetOrSlice -> String
+printMeetOrSlice Meet = "meet"
+printMeetOrSlice Slice = "slice"
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -112,6 +124,14 @@ r = attr (AttrName "r") <<< show
 
 viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
 viewBox x y w h = attr (AttrName "viewBox") (joinWith " " $ map show [x, y, w, h])
+
+preserveAspectRatio :: forall r i. Maybe {x :: Align, y :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
+preserveAspectRatio align slice =
+  attr (AttrName "preserveAspectRatio") (joinWith " " $ [align_str, printMeetOrSlice slice])
+  where
+    align_str = case align of
+      Nothing -> "none"
+      Just {x, y} -> joinWith "" $ ["x", printAlign x, "Y", printAlign y]
 
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
 rx = attr (AttrName "rx") <<< show
