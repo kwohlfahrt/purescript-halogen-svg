@@ -13,6 +13,7 @@ type StyleAttributes r = ("class" :: String | r)
 -- Subset of events that work on Firefox 60/Chromium 66
 type GlobalEventAttributes r =
   ( onClick :: MouseEvent
+  , onDblClick :: MouseEvent
   , onContextMenu :: MouseEvent
   , onKeyDown :: KeyboardEvent
   , onKeyPress :: KeyboardEvent
