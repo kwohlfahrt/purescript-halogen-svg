@@ -27,6 +27,65 @@ data Transform
 
 data TextAnchor = Start | AnchorMiddle | End
 
+data CSSLength
+  = Cm Number
+  | Mm Number
+  | Inches Number
+  | Px Number
+  | Pt Number
+  | Pc Number
+  | Em Number
+  | Ex Number
+  | Rem Number
+  | Vw Number
+  | Vh Number
+  | Vmin Number
+  | Vmax Number
+  | Pct Number
+  | Nil
+
+instance showCSSLength :: Show CSSLength where
+  show (Cm i) = (show i) <> "cm"
+  show (Mm i) = (show i) <> "mm"
+  show (Inches i) = (show i) <> "in"
+  show (Px i) = (show i) <> "px"
+  show (Pt i) = (show i) <> "pt"
+  show (Pc i) = (show i) <> "pc"
+  show (Em i) = (show i) <> "em"
+  show (Ex i) = (show i) <> "ex"
+  show (Rem i) = (show i) <> "rem"
+  show (Vw i) = (show i) <> "vw"
+  show (Vh i) = (show i) <> "vh"
+  show (Vmin i) = (show i) <> "vmin"
+  show (Vmax i) = (show i) <> "vmax"
+  show (Pct i) = (show i) <> "%"
+  show Nil = "0"
+
+
+data FontSize 
+  = XXSmall
+  | XSmall
+  | Small
+  | Medium
+  | Large
+  | XLarge
+  | XXLarge
+  | Smaller
+  | Larger
+  | FontSizeLength CSSLength
+
+instance showFontSize :: Show FontSize where
+  show XXSmall = "xx-small"
+  show XSmall = "x-small"
+  show Small = "small"
+  show Medium = "medium"
+  show Large = "large"
+  show XLarge = "x-large"
+  show XXLarge = "xx-large"
+  show Smaller = "smaller"
+  show Larger = "larger"
+  show (FontSizeLength l) = show l
+
 printTextAnchor :: TextAnchor -> String
 printTextAnchor Start = "start"
 printTextAnchor AnchorMiddle = "middle"
@@ -177,6 +236,9 @@ d = attr (AttrName "d") <<< joinWith " " <<< map printD
 
 text_anchor :: forall r i . TextAnchor -> IProp (text_anchor :: String | r) i
 text_anchor = attr (AttrName "text-anchor") <<< printTextAnchor
+
+font_size :: forall r i. FontSize -> IProp (font_size :: String | r) i
+font_size = attr (AttrName "font-size") <<< show
 
 dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
