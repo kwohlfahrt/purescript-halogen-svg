@@ -3,7 +3,7 @@ module Svg.Elements where
 
 import Prelude
 
-import Core as Core
+import Svg.Core as Core
 
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Elements (Node, Leaf)
