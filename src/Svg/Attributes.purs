@@ -62,7 +62,7 @@ instance showCSSLength :: Show CSSLength where
   show Nil = "0"
 
 
-data FontSize 
+data FontSize
   = XXSmall
   | XSmall
   | Small
