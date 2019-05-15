@@ -87,6 +87,7 @@ type SVGtext = GlobalAttributes
   , text_anchor :: String
   , dominant_baseline :: String
   , transform :: String
+  , font_size :: String
   )
 
 type SVGforeignObject = GlobalAttributes
