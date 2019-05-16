@@ -31,6 +31,13 @@ type GlobalEventAttributes r =
 -- These can also be done with CSS
 type PresentationAttributes r = (stroke :: String, fill :: String | r)
 
+type MarkerAttributes r =
+  ( markerStart :: String
+  , markerMid :: String
+  , markerEnd :: String
+  | r
+  )
+
 type GlobalAttributes r = (PresentationAttributes (GlobalEventAttributes (StyleAttributes (CoreAttributes r))))
 
 type SVGsvg = GlobalAttributes
@@ -68,18 +75,19 @@ type SVGrect = GlobalAttributes
 type SVGg = GlobalAttributes
   ( transform :: String )
 
-type SVGpath = GlobalAttributes
+type SVGpath = MarkerAttributes (GlobalAttributes
   ( d :: String
   , transform :: String
-  )
+  ))
 
-type SVGline = GlobalAttributes
+type SVGline = MarkerAttributes (GlobalAttributes
   ( x1 :: Number
   , y1 :: Number
   , x2 :: Number
   , y2 :: Number
   , transform :: String
-  )
+  , strokeWidth :: Number
+  ))
 
 type SVGtext = GlobalAttributes
   ( x :: Number
@@ -96,3 +104,36 @@ type SVGforeignObject = GlobalAttributes
   , height :: Number
   , width :: Number
   )
+
+type SVGmarker = (PresentationAttributes (StyleAttributes (CoreAttributes
+  ( markerWidth :: Number
+  , markerHeight :: Number
+  , strokeWidth :: Number
+  , refX :: Number
+  , refY :: Number
+  , orient :: String
+  , markerUnits :: String
+  ))))
+
+--------------------------------------------------------------------------------
+
+type AnimationAttributes r = GlobalAttributes
+  ( from :: String
+  , to :: String
+  , begin :: String
+  , dur :: String
+  , repeatCount :: Int
+  , fill :: String -- ^ Unlike 'fill' in 'GlobalAttributes', this is intended to record a 'FillState' via 'fillAnim'.
+  | r
+  )
+
+type SVGanimate = AnimationAttributes (attributeName :: String)
+
+type SVGanimateMotion = AnimationAttributes (path :: String)
+
+-- TODO should this have GlobalAttributes?
+type SVGmpath = (xlinkHref :: String)
+
+--------------------------------------------------------------------------------
+
+type SVGtitle = GlobalAttributes ()

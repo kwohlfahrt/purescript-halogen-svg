@@ -2,19 +2,21 @@ module Svg.Attributes where
 -- Like Halogen.HTML.Properties
 
 import Prelude
-import Data.Maybe (Maybe(..))
+import Data.Maybe (Maybe(..), maybe)
 import Data.String (joinWith, toUpper)
 
 import Core as Core
 
-import Halogen.HTML.Core (Prop, AttrName(AttrName))
-import Halogen.HTML.Properties (IProp)
+import Halogen.HTML.Core (Prop, AttrName(AttrName), Namespace(Namespace))
+import Halogen.HTML.Properties (IProp, attrNS)
 import Unsafe.Coerce (unsafeCoerce)
 
 data Color = RGB Int Int Int
+           | RGBA Int Int Int Number
 
 printColor :: Maybe Color -> String
 printColor (Just (RGB r g b)) = "rgb(" <> (joinWith "," $ map show [r, g, b]) <> ")"
+printColor (Just (RGBA r g b o)) = "rgba(" <> (joinWith "," $ map show [r, g, b]) <> "," <> show o <> ")"
 printColor Nothing = "None"
 
 data Transform
@@ -61,7 +63,6 @@ instance showCSSLength :: Show CSSLength where
   show (Pct i) = (show i) <> "%"
   show Nil = "0"
 
-
 data FontSize
   = XXSmall
   | XSmall
@@ -73,6 +74,30 @@ data FontSize
   | Smaller
   | Larger
   | FontSizeLength CSSLength
+
+data Orient
+  = AutoOrient
+  | AutoStartReverse
+
+instance showOrient :: Show Orient where
+  show AutoOrient = "auto"
+  show AutoStartReverse = "auto-start-reverse"
+
+printOrient :: Orient -> String
+printOrient AutoOrient = "auto"
+printOrient AutoStartReverse = "auto-start-reverse"
+
+data MarkerUnit
+  = UserSpaceOnUse
+  | StrokeWidth
+
+instance showMarkerUnit :: Show MarkerUnit where
+  show UserSpaceOnUse = "userSpaceOnUse"
+  show StrokeWidth = "strokeWidth"
+
+printMarkerUnit :: MarkerUnit -> String
+printMarkerUnit UserSpaceOnUse = "userSpaceOnUse"
+printMarkerUnit StrokeWidth = "strokeWidth"
 
 instance showFontSize :: Show FontSize where
   show XXSmall = "xx-small"
@@ -94,6 +119,7 @@ printTextAnchor End = "end"
 data Baseline
   = Auto | UseScript | NoChange | ResetSize | Ideographic | Alphabetic | Hanging
   | Mathematical | Central | BaselineMiddle | TextAfterEdge | TextBeforeEdge
+
 printBaseline :: Baseline -> String
 printBaseline Auto = "auto"
 printBaseline UseScript = "use-script"
@@ -243,8 +269,98 @@ font_size = attr (AttrName "font-size") <<< show
 dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
 
+-- TODO shouldn't this be 'classes' taking an (Array Classname), like the rest of Halogen?
 class_ :: forall r i . String -> IProp (class :: String | r) i
 class_ = attr (AttrName "class")
 
 id :: forall r i . String -> IProp (id :: String | r) i
 id = attr (AttrName "id")
+
+markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
+markerWidth = attr (AttrName "markerWidth") <<< show
+
+markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
+markerHeight = attr (AttrName "markerHeight") <<< show
+
+refX :: forall r i. Number -> IProp (refX :: Number | r) i
+refX = attr (AttrName "refX") <<< show
+
+refY :: forall r i. Number -> IProp (refY :: Number | r) i
+refY = attr (AttrName "refY") <<< show
+
+orient :: forall r i. Orient -> IProp (orient :: String | r) i
+orient = attr (AttrName "orient") <<< printOrient
+
+markerUnits :: forall r i. MarkerUnit -> IProp (markerUnits :: String | r) i
+markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnit
+
+strokeWidth :: forall r i. Number -> IProp (strokeWidth :: Number | r) i
+strokeWidth = attr (AttrName "stroke-width") <<< show
+
+markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
+markerEnd = attr (AttrName "marker-end")
+
+--------------------------------------------------------------------------------
+
+-- | https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dur
+data DurationF a = Duration (Maybe a) (Maybe a) (Maybe a) (Maybe a) -- ^ TODO hours minutes seconds millis
+
+derive instance functorDurationF :: Functor DurationF
+
+printDurationF :: forall a. Show a => DurationF a -> String
+printDurationF (Duration h m s i) = f "h" h <> f "m" m <> f "s" s <> f "i" i
+  where f u = maybe "" (\v -> show v <> u)
+
+type Duration = DurationF Number
+
+-- TODO derive Show instance for DurationF
+
+printDuration :: Duration -> String
+printDuration = printDurationF
+
+-- TODO add other constructors
+seconds :: Number -> Duration
+seconds s = Duration Nothing Nothing (Just s) Nothing
+
+data FillState = Freeze | Remove
+
+printFillState :: FillState -> String
+printFillState = case _ of
+  Freeze -> "freeze"
+  Remove -> "remove"
+
+dur :: forall r i. Duration -> IProp (dur :: String | r) i
+dur = attr (AttrName "dur") <<< printDuration
+
+-- TODO ADT or free string?
+attributeName :: forall r i. String -> IProp (attributeName :: String | r) i
+attributeName = attr (AttrName "attributeName")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/from
+from :: forall r i. String -> IProp (from :: String | r) i
+from = attr (AttrName "from")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/to
+to :: forall r i. String -> IProp (to :: String | r) i
+to = attr (AttrName "to")
+
+-- https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/begin
+begin :: forall r i. String -> IProp (begin :: String | r) i
+begin = attr (AttrName "begin")
+
+repeatCount :: forall r i. Int -> IProp (repeatCount :: Int | r) i
+repeatCount = attr (AttrName "repeatCount") <<< show
+
+-- TODO this is just 'fill', but that functino is already specialised to Color in this module
+fillAnim :: forall r i. FillState -> IProp (fill :: String | r) i
+fillAnim = attr (AttrName "fill") <<< printFillState
+
+-- TODO xlink:href seems to have some issues, among others around its namespace
+xlinkHref :: forall r i. String -> IProp (xlinkHref :: String | r) i
+-- xlinkHref = attr (AttrName "xlink:href")
+-- xlinkHref = attrNS (Namespace "xlink") (AttrName "href")
+xlinkHref = attrNS (Namespace "xlink") (AttrName "xlink:href")
+
+-- TODO copied from `d`; adapt where needed
+path :: forall r i . Array D -> IProp (path :: String | r) i
+path = attr (AttrName "path") <<< joinWith " " <<< map printD
