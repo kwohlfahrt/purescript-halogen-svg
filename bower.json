@@ -11,12 +11,12 @@
     "output"
   ],
   "dependencies": {
-    "purescript-strings": "^3.3.1",
-    "purescript-halogen": "^3.0.1",
-    "purescript-dom-indexed": "^5.0.0"
+    "purescript-strings": "^4.0.1",
+    "purescript-halogen": "^4.0.0",
+    "purescript-dom-indexed": "^6.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^3.0.0"
+    "purescript-psci-support": "^4.0.0"
   },
   "repository": {
     "type": "git",
