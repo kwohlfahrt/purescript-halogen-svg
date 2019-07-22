@@ -186,3 +186,30 @@ class_ = attr (AttrName "class")
 
 id :: forall r i . String -> IProp (id :: String | r) i
 id = attr (AttrName "id")
+
+markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
+markerStart = attr (AttrName "marker-start")
+
+markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
+markerEnd = attr (AttrName "marker-end")
+
+markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
+markerMid = attr (AttrName "marker-mid")
+
+refX :: forall r i. String -> IProp (refX :: String | r) i
+refX = attr (AttrName "refX")
+
+refY :: forall r i. String -> IProp (refY :: String | r) i
+refY = attr (AttrName "refY")
+
+markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
+markerHeight = attr (AttrName "markerHeight") <<< show
+
+markerUnits :: forall r i. String -> IProp (markerUnits :: String | r) i
+markerUnits = attr (AttrName "markerUnits")
+
+markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
+markerWidth = attr (AttrName "markerWidth") <<< show
+
+orient :: forall r i. String -> IProp (orient :: String | r) i
+orient = attr (AttrName "orient")
