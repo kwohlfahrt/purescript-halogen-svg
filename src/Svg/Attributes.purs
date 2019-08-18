@@ -107,6 +107,45 @@ printMeetOrSlice :: MeetOrSlice -> String
 printMeetOrSlice Meet = "meet"
 printMeetOrSlice Slice = "slice"
 
+data MarkerReferencePoint
+  = LengthPercentage Number
+  | Offset Number
+  | Left
+  | Center
+  | Right
+printMarkerReferencePoint :: MarkerReferencePoint-> String
+printMarkerReferencePoint (LengthPercentage n) = show n <> "%"
+printMarkerReferencePoint (Offset n) = show n
+printMarkerReferencePoint Left = "left"
+printMarkerReferencePoint Center = "center"
+printMarkerReferencePoint Right = "right"
+
+data MarkerOrient
+  = OrientAuto
+  | OrientAutoStartReverse
+  | Angle Number
+printMarkerOrient :: MarkerOrient -> String
+printMarkerOrient OrientAuto = "auto"
+printMarkerOrient OrientAutoStartReverse = "auto-start-reverse"
+printMarkerOrient (Angle n) = show n <> "deg"
+
+data MarkerUnits
+  = StrokeWidth
+  | UserSpaceOnUse
+printMarkerUnits :: MarkerUnits -> String
+printMarkerUnits StrokeWidth = "strokeWidth"
+printMarkerUnits UserSpaceOnUse = "userSpaceOnUse"
+
+-- TODO: type spec of URLs and CSS selectors
+data MarkerRef
+  = URL String
+  | Child
+  | ChildSelector String
+printMarkerRef :: MarkerRef -> String
+printMarkerRef (URL url) = "url(" <> url <> ")"
+printMarkerRef Child = "child"
+printMarkerRef (ChildSelector s) = s
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -187,29 +226,29 @@ class_ = attr (AttrName "class")
 id :: forall r i . String -> IProp (id :: String | r) i
 id = attr (AttrName "id")
 
-markerStart :: forall r i. String -> IProp (markerStart :: String | r) i
-markerStart = attr (AttrName "marker-start")
+markerStart :: forall r i. MarkerRef -> IProp (markerStart :: String | r) i
+markerStart = attr (AttrName "marker-start") <<< printMarkerRef
 
-markerEnd :: forall r i. String -> IProp (markerEnd :: String | r) i
-markerEnd = attr (AttrName "marker-end")
+markerEnd :: forall r i. MarkerRef -> IProp (markerEnd :: String | r) i
+markerEnd = attr (AttrName "marker-end") <<< printMarkerRef
 
-markerMid :: forall r i. String -> IProp (markerMid :: String | r) i
-markerMid = attr (AttrName "marker-mid")
+markerMid :: forall r i. MarkerRef -> IProp (markerMid :: String | r) i
+markerMid = attr (AttrName "marker-mid") <<< printMarkerRef
 
-refX :: forall r i. String -> IProp (refX :: String | r) i
-refX = attr (AttrName "refX")
+refX :: forall r i. MarkerReferencePoint -> IProp (refX :: String | r) i
+refX = attr (AttrName "refX") <<< printMarkerReferencePoint
 
-refY :: forall r i. String -> IProp (refY :: String | r) i
-refY = attr (AttrName "refY")
+refY :: forall r i. MarkerReferencePoint -> IProp (refY :: String | r) i
+refY = attr (AttrName "refY") <<< printMarkerReferencePoint
 
 markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
 markerHeight = attr (AttrName "markerHeight") <<< show
 
-markerUnits :: forall r i. String -> IProp (markerUnits :: String | r) i
-markerUnits = attr (AttrName "markerUnits")
+markerUnits :: forall r i. MarkerUnits -> IProp (markerUnits :: String | r) i
+markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnits
 
 markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
 markerWidth = attr (AttrName "markerWidth") <<< show
 
-orient :: forall r i. String -> IProp (orient :: String | r) i
-orient = attr (AttrName "orient")
+orient :: forall r i. MarkerOrient -> IProp (orient :: String | r) i
+orient = attr (AttrName "orient") <<< printMarkerOrient
