@@ -145,6 +145,15 @@ printMarkerRef (URL url) = "url(" <> url <> ")"
 printMarkerRef Child = "child"
 printMarkerRef (ChildSelector s) = s
 
+data StrokeLinecap
+  = Butt
+  | Round
+  | Square
+printStrokeLinecap :: StrokeLinecap -> String
+printStrokeLinecap Butt = "butt"
+printStrokeLinecap Round = "round"
+printStrokeLinecap Square = "square"
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -251,3 +260,6 @@ markerWidth = attr (AttrName "markerWidth") <<< show
 
 orient :: forall r i. MarkerOrient -> IProp (orient :: String | r) i
 orient = attr (AttrName "orient") <<< printMarkerOrient
+
+strokeLinecap :: forall r i. StrokeLinecap -> IProp (strokeLinecap :: String | r) i
+strokeLinecap = attr (AttrName "stroke-linecap") <<< printStrokeLinecap

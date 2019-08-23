@@ -81,6 +81,7 @@ type SVGline = GlobalAttributes
   , x2 :: Number
   , y2 :: Number
   , transform :: String
+  , strokeLinecap :: String
   )
 
 type SVGtext = GlobalAttributes
