@@ -2,11 +2,10 @@ module Svg.Attributes where
 -- Like Halogen.HTML.Properties
 
 import Prelude
-import Data.Maybe (Maybe(..))
-import Data.String (joinWith, toUpper)
 
 import Core as Core
-
+import Data.Maybe (Maybe(..))
+import Data.String (joinWith, toUpper)
 import Halogen.HTML.Core (Prop, AttrName(AttrName))
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
@@ -14,7 +13,7 @@ import Unsafe.Coerce (unsafeCoerce)
 data Color = RGB Int Int Int
 
 printColor :: Maybe Color -> String
-printColor (Just (RGB r g b)) = "rgb(" <> (joinWith "," $ map show [r, g, b]) <> ")"
+printColor (Just (RGB r' g' b')) = "rgb(" <> (joinWith "," $ map show [r', g', b']) <> ")"
 printColor Nothing = "None"
 
 data Transform
@@ -50,13 +49,13 @@ printBaseline TextAfterEdge = "text-after-edge"
 printBaseline TextBeforeEdge = "text-before-edge"
 
 printTransform :: Transform -> String
-printTransform (Matrix a b c d e f) =
-  "matrix(" <> (joinWith "," $ map show [a, b, c, d, e, f]) <> ")"
-printTransform (Translate x y) = "translate(" <> (joinWith "," $ map show [x, y]) <> ")"
-printTransform (Scale x y) = "scale(" <> (joinWith "," $ map show [x, y]) <> ")"
-printTransform (Rotate a x y) = "rotate(" <> (joinWith "," $ map show [a, x, y]) <> ")"
-printTransform (SkewX a) = "skewX(" <> show a <> ")"
-printTransform (SkewY a) = "skewY(" <> show a <> ")"
+printTransform (Matrix a' b' c' d' e' f') =
+  "matrix(" <> (joinWith "," $ map show [a', b', c', d', e', f']) <> ")"
+printTransform (Translate x' y') = "translate(" <> (joinWith "," $ map show [x', y']) <> ")"
+printTransform (Scale x' y') = "scale(" <> (joinWith "," $ map show [x', y']) <> ")"
+printTransform (Rotate a' x' y') = "rotate(" <> (joinWith "," $ map show [a', x', y']) <> ")"
+printTransform (SkewX a') = "skewX(" <> show a' <> ")"
+printTransform (SkewY a') = "skewY(" <> show a' <> ")"
 
 data D = Rel Command | Abs Command
 printD :: D -> String
@@ -76,20 +75,20 @@ data Command
   | Z
 
 printCommand :: Command -> {command :: String, params :: String}
-printCommand (M x y) = {command: "m", params: joinWith "," $ map show [x, y]}
-printCommand (L x y) = {command: "l", params: joinWith "," $ map show [x, y]}
-printCommand (C x1 y1 x2 y2 x y) =
-  {command: "c" , params: joinWith "," $ map show [x1, y1, x2, y2, x, y]}
-printCommand (S x2 y2 x y) =
-  {command: "s" , params: joinWith "," $ map show [x2, y2, x, y]}
-printCommand (Q x1 y1 x y) =
-  {command: "q" , params: joinWith "," $ map show [x1, y1, x, y]}
-printCommand (T x y) = {command: "t", params: joinWith "," $ map show [x, y]}
-printCommand (A rx ry rot large sweep x y) =
+printCommand (M x' y') = {command: "m", params: joinWith "," $ map show [x', y']}
+printCommand (L x' y') = {command: "l", params: joinWith "," $ map show [x', y']}
+printCommand (C x1' y1' x2' y2' x' y') =
+  {command: "c" , params: joinWith "," $ map show [x1', y1', x2', y2', x', y']}
+printCommand (S x2' y2' x' y') =
+  {command: "s" , params: joinWith "," $ map show [x2', y2', x', y']}
+printCommand (Q x1' y1' x' y') =
+  {command: "q" , params: joinWith "," $ map show [x1', y1', x', y']}
+printCommand (T x' y') = {command: "t", params: joinWith "," $ map show [x', y']}
+printCommand (A rx' ry' rot large sweep x' y') =
   {command: "a", params: joinWith ","
-                 $ map show [ rx, ry, rot ]
+                 $ map show [ rx', ry', rot ]
                  <> [ large_flag, sweep_flag ]
-                 <> map show [ x, y ]}
+                 <> map show [ x', y' ]}
   where
   large_flag = if large then "0" else "1"
   sweep_flag = if sweep then "0" else "1"
@@ -162,7 +161,7 @@ r :: forall s i. Number -> IProp (r :: Number | s) i
 r = attr (AttrName "r") <<< show
 
 viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x y w h = attr (AttrName "viewBox") (joinWith " " $ map show [x, y, w, h])
+viewBox x' y' w' h' = attr (AttrName "viewBox") (joinWith " " $ map show [x', y', w', h'])
 
 preserveAspectRatio :: forall r i. Maybe {x :: Align, y :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
 preserveAspectRatio align slice =
@@ -170,7 +169,7 @@ preserveAspectRatio align slice =
   where
     align_str = case align of
       Nothing -> "none"
-      Just {x, y} -> joinWith "" $ ["x", printAlign x, "Y", printAlign y]
+      Just {x: x', y: y'} -> joinWith "" $ ["x", printAlign x', "Y", printAlign y']
 
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
 rx = attr (AttrName "rx") <<< show
