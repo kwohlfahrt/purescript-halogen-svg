@@ -2,11 +2,10 @@ module Svg.Attributes where
 -- Like Halogen.HTML.Properties
 
 import Prelude
-import Data.Maybe (Maybe(..))
-import Data.String (joinWith, toUpper)
 
 import Core as Core
-
+import Data.Maybe (Maybe(..))
+import Data.String (joinWith, toUpper)
 import Halogen.HTML.Core (Prop, AttrName(AttrName))
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
@@ -14,7 +13,7 @@ import Unsafe.Coerce (unsafeCoerce)
 data Color = RGB Int Int Int
 
 printColor :: Maybe Color -> String
-printColor (Just (RGB r g b)) = "rgb(" <> (joinWith "," $ map show [r, g, b]) <> ")"
+printColor (Just (RGB r' g' b')) = "rgb(" <> (joinWith "," $ map show [r', g', b']) <> ")"
 printColor Nothing = "None"
 
 data Transform
@@ -50,13 +49,13 @@ printBaseline TextAfterEdge = "text-after-edge"
 printBaseline TextBeforeEdge = "text-before-edge"
 
 printTransform :: Transform -> String
-printTransform (Matrix a b c d e f) =
-  "matrix(" <> (joinWith "," $ map show [a, b, c, d, e, f]) <> ")"
-printTransform (Translate x y) = "translate(" <> (joinWith "," $ map show [x, y]) <> ")"
-printTransform (Scale x y) = "scale(" <> (joinWith "," $ map show [x, y]) <> ")"
-printTransform (Rotate a x y) = "rotate(" <> (joinWith "," $ map show [a, x, y]) <> ")"
-printTransform (SkewX a) = "skewX(" <> show a <> ")"
-printTransform (SkewY a) = "skewY(" <> show a <> ")"
+printTransform (Matrix a' b' c' d' e' f') =
+  "matrix(" <> (joinWith "," $ map show [a', b', c', d', e', f']) <> ")"
+printTransform (Translate x' y') = "translate(" <> (joinWith "," $ map show [x', y']) <> ")"
+printTransform (Scale x' y') = "scale(" <> (joinWith "," $ map show [x', y']) <> ")"
+printTransform (Rotate a' x' y') = "rotate(" <> (joinWith "," $ map show [a', x', y']) <> ")"
+printTransform (SkewX a') = "skewX(" <> show a' <> ")"
+printTransform (SkewY a') = "skewY(" <> show a' <> ")"
 
 data D = Rel Command | Abs Command
 printD :: D -> String
@@ -76,20 +75,20 @@ data Command
   | Z
 
 printCommand :: Command -> {command :: String, params :: String}
-printCommand (M x y) = {command: "m", params: joinWith "," $ map show [x, y]}
-printCommand (L x y) = {command: "l", params: joinWith "," $ map show [x, y]}
-printCommand (C x1 y1 x2 y2 x y) =
-  {command: "c" , params: joinWith "," $ map show [x1, y1, x2, y2, x, y]}
-printCommand (S x2 y2 x y) =
-  {command: "s" , params: joinWith "," $ map show [x2, y2, x, y]}
-printCommand (Q x1 y1 x y) =
-  {command: "q" , params: joinWith "," $ map show [x1, y1, x, y]}
-printCommand (T x y) = {command: "t", params: joinWith "," $ map show [x, y]}
-printCommand (A rx ry rot large sweep x y) =
+printCommand (M x' y') = {command: "m", params: joinWith "," $ map show [x', y']}
+printCommand (L x' y') = {command: "l", params: joinWith "," $ map show [x', y']}
+printCommand (C x1' y1' x2' y2' x' y') =
+  {command: "c" , params: joinWith "," $ map show [x1', y1', x2', y2', x', y']}
+printCommand (S x2' y2' x' y') =
+  {command: "s" , params: joinWith "," $ map show [x2', y2', x', y']}
+printCommand (Q x1' y1' x' y') =
+  {command: "q" , params: joinWith "," $ map show [x1', y1', x', y']}
+printCommand (T x' y') = {command: "t", params: joinWith "," $ map show [x', y']}
+printCommand (A rx' ry' rot large sweep x' y') =
   {command: "a", params: joinWith ","
-                 $ map show [ rx, ry, rot ]
+                 $ map show [ rx', ry', rot ]
                  <> [ large_flag, sweep_flag ]
-                 <> map show [ x, y ]}
+                 <> map show [ x', y' ]}
   where
   large_flag = if large then "0" else "1"
   sweep_flag = if sweep then "0" else "1"
@@ -107,6 +106,54 @@ printMeetOrSlice :: MeetOrSlice -> String
 printMeetOrSlice Meet = "meet"
 printMeetOrSlice Slice = "slice"
 
+data MarkerReferencePoint
+  = LengthPercentage Number
+  | Offset Number
+  | Left
+  | Center
+  | Right
+printMarkerReferencePoint :: MarkerReferencePoint-> String
+printMarkerReferencePoint (LengthPercentage n) = show n <> "%"
+printMarkerReferencePoint (Offset n) = show n
+printMarkerReferencePoint Left = "left"
+printMarkerReferencePoint Center = "center"
+printMarkerReferencePoint Right = "right"
+
+data MarkerOrient
+  = OrientAuto
+  | OrientAutoStartReverse
+  | Angle Number
+printMarkerOrient :: MarkerOrient -> String
+printMarkerOrient OrientAuto = "auto"
+printMarkerOrient OrientAutoStartReverse = "auto-start-reverse"
+printMarkerOrient (Angle n) = show n <> "deg"
+
+data MarkerUnits
+  = StrokeWidth
+  | UserSpaceOnUse
+printMarkerUnits :: MarkerUnits -> String
+printMarkerUnits StrokeWidth = "strokeWidth"
+printMarkerUnits UserSpaceOnUse = "userSpaceOnUse"
+
+-- TODO: type spec of URLs and CSS selectors
+data MarkerRef
+  = URL String
+  | Child
+  | ChildSelector String
+printMarkerRef :: MarkerRef -> String
+printMarkerRef (URL url) = "url(" <> url <> ")"
+printMarkerRef Child = "child"
+printMarkerRef (ChildSelector s) = s
+
+data StrokeLinecap
+  = Butt
+  | Round
+  | Square
+printStrokeLinecap :: StrokeLinecap -> String
+printStrokeLinecap Butt = "butt"
+printStrokeLinecap Round = "round"
+printStrokeLinecap Square = "square"
+
 attr :: forall r i. AttrName -> String -> IProp r i
 attr = coe Core.attr
   where
@@ -123,7 +170,7 @@ r :: forall s i. Number -> IProp (r :: Number | s) i
 r = attr (AttrName "r") <<< show
 
 viewBox :: forall r i. Number -> Number -> Number -> Number -> IProp (viewBox :: String | r) i
-viewBox x y w h = attr (AttrName "viewBox") (joinWith " " $ map show [x, y, w, h])
+viewBox x' y' w' h' = attr (AttrName "viewBox") (joinWith " " $ map show [x', y', w', h'])
 
 preserveAspectRatio :: forall r i. Maybe {x :: Align, y :: Align} -> MeetOrSlice -> IProp (preserveAspectRatio :: String | r) i
 preserveAspectRatio align slice =
@@ -131,7 +178,7 @@ preserveAspectRatio align slice =
   where
     align_str = case align of
       Nothing -> "none"
-      Just {x, y} -> joinWith "" $ ["x", printAlign x, "Y", printAlign y]
+      Just {x: x', y: y'} -> joinWith "" $ ["x", printAlign x', "Y", printAlign y']
 
 rx :: forall r i. Number -> IProp (rx :: Number | r) i
 rx = attr (AttrName "rx") <<< show
@@ -186,3 +233,33 @@ class_ = attr (AttrName "class")
 
 id :: forall r i . String -> IProp (id :: String | r) i
 id = attr (AttrName "id")
+
+markerStart :: forall r i. MarkerRef -> IProp (markerStart :: String | r) i
+markerStart = attr (AttrName "marker-start") <<< printMarkerRef
+
+markerEnd :: forall r i. MarkerRef -> IProp (markerEnd :: String | r) i
+markerEnd = attr (AttrName "marker-end") <<< printMarkerRef
+
+markerMid :: forall r i. MarkerRef -> IProp (markerMid :: String | r) i
+markerMid = attr (AttrName "marker-mid") <<< printMarkerRef
+
+refX :: forall r i. MarkerReferencePoint -> IProp (refX :: String | r) i
+refX = attr (AttrName "refX") <<< printMarkerReferencePoint
+
+refY :: forall r i. MarkerReferencePoint -> IProp (refY :: String | r) i
+refY = attr (AttrName "refY") <<< printMarkerReferencePoint
+
+markerHeight :: forall r i. Number -> IProp (markerHeight :: Number | r) i
+markerHeight = attr (AttrName "markerHeight") <<< show
+
+markerUnits :: forall r i. MarkerUnits -> IProp (markerUnits :: String | r) i
+markerUnits = attr (AttrName "markerUnits") <<< printMarkerUnits
+
+markerWidth :: forall r i. Number -> IProp (markerWidth :: Number | r) i
+markerWidth = attr (AttrName "markerWidth") <<< show
+
+orient :: forall r i. MarkerOrient -> IProp (orient :: String | r) i
+orient = attr (AttrName "orient") <<< printMarkerOrient
+
+strokeLinecap :: forall r i. StrokeLinecap -> IProp (strokeLinecap :: String | r) i
+strokeLinecap = attr (AttrName "stroke-linecap") <<< printStrokeLinecap
