@@ -9,7 +9,7 @@ import Data.Tuple (Tuple)
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
-import Halogen.Svg.Indexed as I
+import DOM.Svg.Indexed as I
 
 -- Not exported by Halogen.HTML.Elements.Keyed
 type KeyedNode r w i
