@@ -8,3 +8,4 @@ install:
 
 script:
   - npm run -s test
+  - npm run -s examples:circle:bundle-app

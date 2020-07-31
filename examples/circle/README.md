@@ -7,7 +7,7 @@ This is a minimal example to show (and test) SVG usage.
 From the current directory:
 
     > npm install
-    > npm run build
-    
+    > npm run examples:circle:bundle-app
+
 The code will be build as `./dist/app.js`, runnable by opening
 `./dist/index.html`.

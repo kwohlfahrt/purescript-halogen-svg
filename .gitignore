@@ -8,3 +8,5 @@ package-lock.json
 *.swp
 /.psc-ide-port
 /.spago/
+/examples/circle/dist/app.js
+*.log

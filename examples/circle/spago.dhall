@@ -2,12 +2,8 @@
 Welcome to a Spago project!
 You can edit this file as you like.
 -}
-{ name =
-    "svg-example"
-, dependencies =
-    [ "effect", "console", "psci-support", "halogen-svg" ]
-, packages =
-    ./packages.dhall
-, sources =
-    [ "src/**/*.purs", "test/**/*.purs" ]
+{ name = "halogen-svg-example"
+, dependencies = (../../spago.dhall).dependencies
+, packages = (../../spago.dhall).packages
+, sources = (../../spago.dhall).sources # ["examples/circle/**/*.purs"]
 }

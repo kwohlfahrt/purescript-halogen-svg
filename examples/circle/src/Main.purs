@@ -12,10 +12,10 @@ import Halogen.HTML.Events as HE
 import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.VDom.Driver (runUI)
 
-import Svg.Elements as SE
-import Svg.Attributes as SA
+import Halogen.Svg.Elements as SE
+import Halogen.Svg.Attributes as SA
 
-data Action = ToggleState 
+data Action = ToggleState
 
 type State = { on :: Boolean }
 

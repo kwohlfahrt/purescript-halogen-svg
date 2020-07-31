@@ -3,8 +3,9 @@
   "scripts": {
     "postinstall": "spago install",
     "build": "spago build --purs-args '--strict'",
-    "watch": "spago build --watch",
-    "test": "spago test --purs-args '--censor-lib --strict'"
+    "test": "spago test --purs-args '--strict'",
+    "examples:circle:build": "spago build --config examples/circle/spago.dhall",
+    "examples:circle:bundle-app": "spago --config examples/circle/spago.dhall bundle-app --to examples/circle/dist/app.js"
   },
   "devDependencies": {
     "purescript-psa": "^0.7.3"

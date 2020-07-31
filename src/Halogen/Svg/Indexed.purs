@@ -1,4 +1,4 @@
-module Svg.Indexed where
+module Halogen.Svg.Indexed where
 
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.WheelEvent (WheelEvent)

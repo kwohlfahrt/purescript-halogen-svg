@@ -1,15 +1,15 @@
-module Svg.Elements.Keyed where
+module Halogen.Svg.Elements.Keyed where
 -- Like Halogen.HTML.Elements
 
 import Prelude
 
-import Core as Core
+import Halogen.Svg.Core as Core
 
 import Data.Tuple (Tuple)
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
-import Svg.Indexed as I
+import Halogen.Svg.Indexed as I
 
 -- Not exported by Halogen.HTML.Elements.Keyed
 type KeyedNode r w i
