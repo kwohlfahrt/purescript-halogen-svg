@@ -1,8 +1,6 @@
 module Halogen.Svg.Elements where
 -- Like Halogen.HTML.Elements
 
-import Prelude
-
 import Halogen.Svg.Core as Core
 
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
