@@ -21,11 +21,20 @@ element = coe Core.element
 svg :: forall p i. Node I.SVGsvg p i
 svg = element (ElemName "svg")
 
+svg_ :: forall w i. Array (HTML w i) -> HTML w i
+svg_ = svg []
+
 g :: forall p i. Node I.SVGg p i
 g = element (ElemName "g")
 
+g_ :: forall w i. Array (HTML w i) -> HTML w i
+g_ = g []
+
 circle :: forall p i. Node I.SVGcircle p i
 circle = element (ElemName "circle")
+
+circle_ :: forall w i. Array (HTML w i) -> HTML w i
+circle_ = circle []
 
 ellipse :: forall p i. Leaf I.SVGellipse p i
 ellipse props = element (ElemName "ellipse") props []
@@ -42,11 +51,20 @@ line props = element (ElemName "line") props []
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
 
+text_ :: forall w i. Array (HTML w i) -> HTML w i
+text_ = text []
+
 foreignObject :: forall p i . Node I.SVGforeignObject p i
 foreignObject = element (ElemName "foreignObject")
 
+foreignObject_ :: forall w i. Array (HTML w i) -> HTML w i
+foreignObject_ = foreignObject []
+
 marker :: forall p i. Node I.SVGmarker p i
 marker = element (ElemName "marker")
+
+marker_ :: forall w i. Array (HTML w i) -> HTML w i
+marker_ = marker []
 
 defs :: forall p i. Array (HTML p i) -> HTML p i
 defs = element (ElemName "defs") []
