@@ -8,11 +8,13 @@ import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 
 type CoreAttributes r =
   ( id :: String
+  , lang :: String
   | r
   )
 
 type StyleAttributes r =
   ( "class" :: String
+  , style :: String
   | r
   )
 
@@ -125,3 +127,5 @@ type SVGmarker = GlobalAttributes
   , markerWidth :: Number
   , orient :: String
   )
+
+type SVGdefs = StyleAttributes (CoreAttributes ())

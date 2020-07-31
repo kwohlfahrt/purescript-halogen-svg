@@ -66,5 +66,8 @@ marker = element (ElemName "marker")
 marker_ :: forall w i. Array (HTML w i) -> HTML w i
 marker_ = marker []
 
-defs :: forall p i. Array (HTML p i) -> HTML p i
-defs = element (ElemName "defs") []
+defs :: forall p i. Node I.SVGdefs p i
+defs = element (ElemName "defs")
+
+defs_ :: forall p i. Array (HTML p i) -> HTML p i
+defs_ = defs []
