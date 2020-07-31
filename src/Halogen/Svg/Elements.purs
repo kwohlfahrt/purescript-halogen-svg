@@ -19,13 +19,13 @@ element = coe Core.element
     coe = unsafeCoerce
 
 svg :: forall p i. Node I.SVGsvg p i
-svg = element $ ElemName "svg"
+svg = element (ElemName "svg")
 
 g :: forall p i. Node I.SVGg p i
-g = element $ ElemName "g"
+g = element (ElemName "g")
 
 circle :: forall p i. Node I.SVGcircle p i
-circle = element $ ElemName "circle"
+circle = element (ElemName "circle")
 
 ellipse :: forall p i. Leaf I.SVGellipse p i
 ellipse props = element (ElemName "ellipse") props []
