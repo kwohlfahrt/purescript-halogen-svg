@@ -31,14 +31,15 @@ ui = H.mkComponent { initialState
   where
   render :: State -> H.ComponentHTML Action () g
   render state =
-    SE.svg [SA.viewBox x y w h]
-    [ SE.circle
-      [ SA.r (if state.on then w/6.0 else w/3.0)
-      , SA.fill $ Just (SA.RGB 0 0 100)
-      , HE.onClick (const $ Just ToggleState)
+    SE.svg
+      [ SA.viewBox x y w h ]
+      [ SE.circle
+        [ SA.r (if state.on then w/6.0 else w/3.0)
+        , SA.fill $ Just (SA.RGB 0 0 100)
+        , HE.onClick (const $ Just ToggleState)
+        ]
+        []
       ]
-    ]
-
     where
     h = 150.0
     w = 150.0

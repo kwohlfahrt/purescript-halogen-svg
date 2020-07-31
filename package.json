@@ -4,7 +4,7 @@
     "postinstall": "spago install",
     "build": "spago build --purs-args '--strict'",
     "test": "spago test --purs-args '--strict'",
-    "examples:circle:build": "spago build --config examples/circle/spago.dhall",
+    "examples:circle:build": "spago --config examples/circle/spago.dhall build",
     "examples:circle:bundle-app": "spago --config examples/circle/spago.dhall bundle-app --to examples/circle/dist/app.js"
   },
   "devDependencies": {
