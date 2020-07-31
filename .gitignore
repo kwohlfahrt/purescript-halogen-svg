@@ -6,3 +6,5 @@
 package-lock.json
 .psc-package
 *.swp
+/.psc-ide-port
+/.spago/

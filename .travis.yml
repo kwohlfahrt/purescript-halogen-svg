@@ -1,10 +1,9 @@
 language: node_js
-dist: trusty
-sudo: required
-node_js: 8
+
+node_js: stable
+
 install:
-  - npm install -g psc-package pulp purescript@">=0.12 <0.13"
   - npm install
+
 script:
-  - pulp --version
-  - npm test
+  - npm run -s test
