@@ -4,6 +4,7 @@
 /output/
 /.psci*
 package-lock.json
+yarn.lock
 .psc-package
 *.swp
 /.psc-ide-port
