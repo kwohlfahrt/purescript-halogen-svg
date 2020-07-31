@@ -24,8 +24,8 @@ svg = element $ ElemName "svg"
 g :: forall p i. Node I.SVGg p i
 g = element $ ElemName "g"
 
-circle :: forall p i. Leaf I.SVGcircle p i
-circle props = element (ElemName "circle") props []
+circle :: forall p i. Node I.SVGcircle p i
+circle = element $ ElemName "circle"
 
 ellipse :: forall p i. Leaf I.SVGellipse p i
 ellipse props = element (ElemName "ellipse") props []
