@@ -20,8 +20,6 @@ element =
     -> ElemName -> Array (Prop i) -> Array (HTML w i) -> HTML w i
   coe = unsafeCoerce
 
-
-
 attr :: forall i. AttrName -> String -> Prop i
 attr (AttrName name) = Attribute Nothing name
 

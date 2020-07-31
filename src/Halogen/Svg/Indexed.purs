@@ -6,9 +6,15 @@ import Web.UIEvent.KeyboardEvent (KeyboardEvent)
 
 -- Attributes based on Mozilla MDN categories
 
-type CoreAttributes r = (id :: String | r)
+type CoreAttributes r =
+  ( id :: String
+  | r
+  )
 
-type StyleAttributes r = ("class" :: String | r)
+type StyleAttributes r =
+  ( "class" :: String
+  | r
+  )
 
 -- Subset of events that work on Firefox 60/Chromium 66
 type GlobalEventAttributes r =
@@ -26,12 +32,22 @@ type GlobalEventAttributes r =
   , onMouseOver :: MouseEvent
   , onMouseUp :: MouseEvent
   , onWheel :: WheelEvent
-  | r)
+  | r
+  )
 
 -- These can also be done with CSS
-type PresentationAttributes r = (stroke :: String, fill :: String | r)
+type PresentationAttributes r =
+  ( stroke :: String
+  , fill :: String
+  | r
+  )
 
-type MarkerAttributes r = (markerStart :: String, markerMid :: String, markerEnd :: String | r)
+type MarkerAttributes r =
+  ( markerStart :: String
+  , markerMid :: String
+  , markerEnd :: String
+  | r
+  )
 
 type GlobalAttributes r = (PresentationAttributes (MarkerAttributes (GlobalEventAttributes (StyleAttributes (CoreAttributes r)))))
 
@@ -68,7 +84,8 @@ type SVGrect = GlobalAttributes
   )
 
 type SVGg = GlobalAttributes
-  ( transform :: String )
+  ( transform :: String
+  )
 
 type SVGpath = GlobalAttributes
   ( d :: String
@@ -101,10 +118,10 @@ type SVGforeignObject = GlobalAttributes
   )
 
 type SVGmarker = GlobalAttributes
-                 ( refX :: String
-                 , refY :: String
-                 , markerHeight :: Number
-                 , markerUnits :: String
-                 , markerWidth :: Number
-                 , orient :: String
-                 )
+  ( refX :: String
+  , refY :: String
+  , markerHeight :: Number
+  , markerUnits :: String
+  , markerWidth :: Number
+  , orient :: String
+  )
