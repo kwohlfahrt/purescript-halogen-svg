@@ -5,3 +5,4 @@
 /.psci*
 package-lock.json
 .psc-package
+*.swp

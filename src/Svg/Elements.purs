@@ -44,3 +44,9 @@ text = element (ElemName "text")
 
 foreignObject :: forall p i . Node I.SVGforeignObject p i
 foreignObject = element (ElemName "foreignObject")
+
+marker :: forall p i. Node I.SVGmarker p i
+marker = element (ElemName "marker")
+
+defs :: forall p i. Array (HTML p i) -> HTML p i
+defs = element (ElemName "defs") []
