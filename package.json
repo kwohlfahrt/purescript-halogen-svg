@@ -7,8 +7,6 @@
     "test": "spago test --purs-args '--censor-lib --strict'"
   },
   "devDependencies": {
-    "purescript": "^0.13.8",
-    "purescript-psa": "^0.7.3",
-    "spago": "^0.15.3"
+    "purescript-psa": "^0.7.3"
   }
 }
