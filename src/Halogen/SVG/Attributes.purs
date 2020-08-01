@@ -3,11 +3,11 @@ module Halogen.SVG.Attributes where
 
 import Prelude
 
-import Halogen.SVG.Core as Core
 import Data.Maybe (Maybe(..))
 import Data.String (joinWith, toUpper)
-import Halogen.HTML.Core (Prop, AttrName(AttrName))
+import Halogen.HTML.Core (AttrName(AttrName), ClassName(..), Prop)
 import Halogen.HTML.Properties (IProp)
+import Halogen.SVG.Core as Core
 import Unsafe.Coerce (unsafeCoerce)
 
 data Color = RGB Int Int Int
@@ -291,8 +291,11 @@ dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
 
 -- | `Property "className"` as used by Halogen.HTML.Properties does not work with SVG
-class_ :: forall r i . String -> IProp (class :: String | r) i
-class_ = attr (AttrName "class")
+class_ :: forall r i . ClassName -> IProp (class :: String | r) i
+class_ = attr (AttrName "class") <<< (unsafeCoerce :: ClassName -> String)
+
+classes :: forall r i. Array ClassName -> IProp (class :: String | r) i
+classes = attr (AttrName "class") <<< joinWith " " <<< (unsafeCoerce :: Array ClassName -> Array String)
 
 id :: forall r i . String -> IProp (id :: String | r) i
 id = attr (AttrName "id")
