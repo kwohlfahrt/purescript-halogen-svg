@@ -4,4 +4,10 @@
 /output/
 /.psci*
 package-lock.json
+yarn.lock
 .psc-package
+*.swp
+/.psc-ide-port
+/.spago/
+/examples/circle/dist/app.js
+*.log
