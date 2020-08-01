@@ -16,6 +16,8 @@ element = coe Core.element
         -> ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
     coe = unsafeCoerce
 
+-- | Nodes
+
 svg :: forall p i. Node I.SVGsvg p i
 svg = element (ElemName "svg")
 
@@ -33,18 +35,6 @@ circle = element (ElemName "circle")
 
 circle_ :: forall w i. Array (HTML w i) -> HTML w i
 circle_ = circle []
-
-ellipse :: forall p i. Leaf I.SVGellipse p i
-ellipse props = element (ElemName "ellipse") props []
-
-rect :: forall p i. Leaf I.SVGrect p i
-rect props = element (ElemName "rect") props []
-
-path :: forall p i. Leaf I.SVGpath p i
-path props = element (ElemName "path") props []
-
-line :: forall p i. Leaf I.SVGline p i
-line props = element (ElemName "line") props []
 
 text :: forall p i. Node I.SVGtext p i
 text = element (ElemName "text")
@@ -69,3 +59,17 @@ defs = element (ElemName "defs")
 
 defs_ :: forall p i. Array (HTML p i) -> HTML p i
 defs_ = defs []
+
+-- | Leafs
+
+ellipse :: forall p i. Leaf I.SVGellipse p i
+ellipse props = element (ElemName "ellipse") props []
+
+rect :: forall p i. Leaf I.SVGrect p i
+rect props = element (ElemName "rect") props []
+
+path :: forall p i. Leaf I.SVGpath p i
+path props = element (ElemName "path") props []
+
+line :: forall p i. Leaf I.SVGline p i
+line props = element (ElemName "line") props []

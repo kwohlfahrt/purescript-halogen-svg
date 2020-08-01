@@ -1,7 +1,4 @@
 module Halogen.Svg.Elements.Keyed where
--- Like Halogen.HTML.Elements
-
-import Prelude
 
 import Halogen.Svg.Core as Core
 
@@ -24,11 +21,16 @@ keyedElement = coe Core.keyedElement
         -> ElemName -> Array (IProp r i) -> Array (Tuple String (HTML p i)) -> HTML p i
     coe = unsafeCoerce
 
+-- | Nodes
+
 svg :: forall p i. KeyedNode I.SVGsvg p i
-svg = keyedElement $ ElemName "svg"
+svg = keyedElement (ElemName "svg")
 
 g :: forall p i. KeyedNode I.SVGg p i
-g = keyedElement $ ElemName "g"
+g = keyedElement (ElemName "g")
+
+circle :: forall p i. KeyedNode I.SVGcircle p i
+circle = keyedElement (ElemName "circle")
 
 text :: forall p i. KeyedNode I.SVGtext p i
 text = keyedElement (ElemName "text")
@@ -39,5 +41,5 @@ foreignObject = keyedElement (ElemName "foreignObject")
 marker :: forall p i. KeyedNode I.SVGmarker p i
 marker = keyedElement (ElemName "marker")
 
-defs :: forall p i. Array (Tuple String (HTML p i)) -> HTML p i
-defs = keyedElement (ElemName "defs") []
+defs :: forall p i. KeyedNode I.SVGdefs p i
+defs = keyedElement (ElemName "defs")
