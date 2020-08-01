@@ -290,6 +290,7 @@ font_size = attr (AttrName "font-size") <<< show
 dominant_baseline :: forall r i . Baseline -> IProp (transform :: String | r) i
 dominant_baseline = attr (AttrName "dominant-baseline") <<< printBaseline
 
+-- | `Property "className"` as used by Halogen.HTML.Properties does not work with SVG
 class_ :: forall r i . String -> IProp (class :: String | r) i
 class_ = attr (AttrName "class")
 
