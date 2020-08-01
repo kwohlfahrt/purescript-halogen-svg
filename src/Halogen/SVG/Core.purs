@@ -1,4 +1,4 @@
-module Halogen.Svg.Core where
+module Halogen.SVG.Core where
 -- Like Halogen.HTML.Core
 
 import Prelude

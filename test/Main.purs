@@ -2,8 +2,8 @@ module Test.Main where
 
 import Prelude
 import Halogen.HTML as HH
-import Halogen.Svg.Attributes as SA
-import Halogen.Svg.Elements as SE
+import Halogen.SVG.Attributes as SA
+import Halogen.SVG.Elements as SE
 import Effect (Effect)
 import Effect.Console (log)
 

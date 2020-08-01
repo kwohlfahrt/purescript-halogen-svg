@@ -1,9 +1,9 @@
-module Halogen.Svg.Attributes where
+module Halogen.SVG.Attributes where
 -- Like Halogen.HTML.Properties
 
 import Prelude
 
-import Halogen.Svg.Core as Core
+import Halogen.SVG.Core as Core
 import Data.Maybe (Maybe(..))
 import Data.String (joinWith, toUpper)
 import Halogen.HTML.Core (Prop, AttrName(AttrName))

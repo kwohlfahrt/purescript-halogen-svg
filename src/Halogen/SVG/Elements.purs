@@ -1,13 +1,13 @@
-module Halogen.Svg.Elements where
+module Halogen.SVG.Elements where
 -- Like Halogen.HTML.Elements
 
-import Halogen.Svg.Core as Core
+import Halogen.SVG.Core as Core
 
 import Halogen.HTML.Core (HTML, Prop, ElemName(ElemName))
 import Halogen.HTML.Elements (Node, Leaf)
 import Halogen.HTML.Properties (IProp)
 import Unsafe.Coerce (unsafeCoerce)
-import DOM.Svg.Indexed as I
+import DOM.SVG.Indexed as I
 
 element :: forall r p i. ElemName -> Array (IProp r i) -> Array (HTML p i) -> HTML p i
 element = coe Core.element

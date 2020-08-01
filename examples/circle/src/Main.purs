@@ -12,8 +12,8 @@ import Halogen.HTML.Events as HE
 import Halogen.Aff (awaitBody, runHalogenAff)
 import Halogen.VDom.Driver (runUI)
 
-import Halogen.Svg.Elements as SE
-import Halogen.Svg.Attributes as SA
+import Halogen.SVG.Elements as SE
+import Halogen.SVG.Attributes as SA
 
 data Action = ToggleState
 

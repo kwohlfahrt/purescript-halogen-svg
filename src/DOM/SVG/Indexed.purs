@@ -1,4 +1,4 @@
-module DOM.Svg.Indexed where
+module DOM.SVG.Indexed where
 
 import Web.UIEvent.MouseEvent (MouseEvent)
 import Web.UIEvent.WheelEvent (WheelEvent)
